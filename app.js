@@ -24,83 +24,64 @@ function knightMoves(start, end) {
 
     while (!finished(position, end)) {
         // check all 8 possible movements
-        console.log(`${position[0] + 1}, ${position[1] + 2}`);
         if ((position[0] + 1 >= 0 && position[0] + 1 < row) && (position[1] + 2 >= 0 && position[1] + 2 < col)) { //check if position is in bounds
-            console.log("in bounds")
             if (graph[position[0] + 1][position[1] + 2] > graph[position[0]][position[1]] + 1) { //check if movement will reduce moves for that spot
-                console.log("pushing to queue");
                 queue.push([position[0] + 1, position[1] + 2]);
                 graph[position[0] + 1][position[1] + 2] = graph[position[0]][position[1]] + 1;
             }
         }
 
-        if ((position[0] + 2 >= 0 && position[0] + 2 < row) && (position[1] + 1 >= 0 && position[1] + 1 < col)) { //check if position is in bounds
-            console.log("in bounds")
-            if (graph[position[0] + 2][position[1] + 1] > graph[position[0]][position[1]] + 1) { //check if movement will reduce moves for that spot
-                console.log("pushing to queue");
+        if ((position[0] + 2 >= 0 && position[0] + 2 < row) && (position[1] + 1 >= 0 && position[1] + 1 < col)) {
+            if (graph[position[0] + 2][position[1] + 1] > graph[position[0]][position[1]] + 1) {
                 queue.push([position[0] + 2, position[1] + 1]);
                 graph[position[0] + 2][position[1] + 1] = graph[position[0]][position[1]] + 1;
             }
         }
 
-        if ((position[0] + 2 >= 0 && position[0] + 2 < row) && (position[1] - 1 >= 0 && position[1] - 1 < col)) { //check if position is in bounds
-            console.log("in bounds")
-            if (graph[position[0] + 2][position[1] - 1] > graph[position[0]][position[1]] + 1) { //check if movement will reduce moves for that spot
-                console.log("pushing to queue");
+        if ((position[0] + 2 >= 0 && position[0] + 2 < row) && (position[1] - 1 >= 0 && position[1] - 1 < col)) {
+            if (graph[position[0] + 2][position[1] - 1] > graph[position[0]][position[1]] + 1) {
                 queue.push([position[0] + 2, position[1] - 1]);
                 graph[position[0] + 2][position[1] - 1] = graph[position[0]][position[1]] + 1;
             }
         }
 
-        if ((position[0] + 1 >= 0 && position[0] + 1 < row) && (position[1] - 2 >= 0 && position[1] - 2 < col)) { //check if position is in bounds
-            console.log("in bounds")
-            if (graph[position[0] + 1][position[1] - 2] > graph[position[0]][position[1]] + 1) { //check if movement will reduce moves for that spot
-                console.log("pushing to queue");
+        if ((position[0] + 1 >= 0 && position[0] + 1 < row) && (position[1] - 2 >= 0 && position[1] - 2 < col)) {
+            if (graph[position[0] + 1][position[1] - 2] > graph[position[0]][position[1]] + 1) {
                 queue.push([position[0] + 1, position[1] - 2]);
                 graph[position[0] + 1][position[1] - 2] = graph[position[0]][position[1]] + 1;
             }
         }
 
-        if ((position[0] - 1 >= 0 && position[0] - 1 < row) && (position[1] - 2 >= 0 && position[1] - 2 < col)) { //check if position is in bounds
-            console.log("in bounds")
-            if (graph[position[0] - 1][position[1] - 2] > graph[position[0]][position[1]] + 1) { //check if movement will reduce moves for that spot
-                console.log("pushing to queue");
+        if ((position[0] - 1 >= 0 && position[0] - 1 < row) && (position[1] - 2 >= 0 && position[1] - 2 < col)) {
+            if (graph[position[0] - 1][position[1] - 2] > graph[position[0]][position[1]] + 1) {
                 queue.push([position[0] - 1, position[1] - 2]);
                 graph[position[0] - 1][position[1] - 2] = graph[position[0]][position[1]] + 1;
             }
         }
 
-        if ((position[0] - 2 >= 0 && position[0] - 2 < row) && (position[1] - 1 >= 0 && position[1] - 1 < col)) { //check if position is in bounds
-            console.log("in bounds")
-            if (graph[position[0] - 2][position[1] - 1] > graph[position[0]][position[1]] + 1) { //check if movement will reduce moves for that spot
-                console.log("pushing to queue");
+        if ((position[0] - 2 >= 0 && position[0] - 2 < row) && (position[1] - 1 >= 0 && position[1] - 1 < col)) {
+            if (graph[position[0] - 2][position[1] - 1] > graph[position[0]][position[1]] + 1) {
                 queue.push([position[0] - 2, position[1] - 1]);
                 graph[position[0] - 2][position[1] - 1] = graph[position[0]][position[1]] + 1;
             }
         }
 
-        if ((position[0] - 2 >= 0 && position[0] - 2 < row) && (position[1] + 1 >= 0 && position[1] + 1 < col)) { //check if position is in bounds
-            console.log("in bounds")
-            if (graph[position[0] - 2][position[1] + 1] > graph[position[0]][position[1]] + 1) { //check if movement will reduce moves for that spot
-                console.log("pushing to queue");
+        if ((position[0] - 2 >= 0 && position[0] - 2 < row) && (position[1] + 1 >= 0 && position[1] + 1 < col)) {
+            if (graph[position[0] - 2][position[1] + 1] > graph[position[0]][position[1]] + 1) {
                 queue.push([position[0] - 2, position[1] + 1]);
                 graph[position[0] - 2][position[1] + 1] = graph[position[0]][position[1]] + 1;
             }
         }
 
-        if ((position[0] - 1 >= 0 && position[0] - 1 < row) && (position[1] + 2 >= 0 && position[1] + 2 < col)) { //check if position is in bounds
-            console.log("in bounds")
-            if (graph[position[0] - 1][position[1] + 2] > graph[position[0]][position[1]] + 1) { //check if movement will reduce moves for that spot
-                console.log("pushing to queue");
+        if ((position[0] - 1 >= 0 && position[0] - 1 < row) && (position[1] + 2 >= 0 && position[1] + 2 < col)) {
+            if (graph[position[0] - 1][position[1] + 2] > graph[position[0]][position[1]] + 1) {
                 queue.push([position[0] - 1, position[1] + 2]);
                 graph[position[0] - 1][position[1] + 2] = graph[position[0]][position[1]] + 1;
             }
         }
 
-        console.log(queue);
         position = [queue[0][0], queue[0][1]];
         queue.shift();
-        console.log(graph);
     }
     console.log(`Finished after ${graph[end[0]][end[1]]} moves`);
 }

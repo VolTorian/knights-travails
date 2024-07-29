@@ -4,6 +4,7 @@ const row = 8;
 const col = 8;
 const graph = [];
 const queue = [];
+const path = [];
 
 function reset() {
     for (let i = 0; i < row; i++) {
@@ -13,6 +14,7 @@ function reset() {
         }
     }
     queue.length = 0;
+    path.length = 0;
 }
 
 function knightMoves(start, end) {
@@ -92,6 +94,7 @@ function knightMoves(start, end) {
     }
     console.log(`Finished after ${graph[end[0]][end[1]][0]} moves`);
     displayGraph();
+    getPath(start, end);
 }
 
 function finished(position, end) {
@@ -107,4 +110,18 @@ function displayGraph() {
     for (let i = 0; i < row; i++) {
         console.log(graph[i][0][0], graph[i][1][0], graph[i][2][0], graph[i][3][0], graph[i][4][0], graph[i][5][0], graph[i][6][0], graph[i][7][0]);
     }
+}
+
+function getPath(start, end) {
+    path.unshift(graph[end[0]][end[1]]);
+
+    while (path[0][0] != start[0] && path[0][1] != start[1]) {
+        path.unshift(graph[path[0][1][0]][path[0][1][1]]);
+    }
+
+    console.log(`Starting at [${start}]`);
+    for (let i = 2; i < path.length; i++) {
+        console.log(`Step ${i - 1}: [${path[i][1]}]`);
+    }
+    console.log(`Ending at step [${end}]`);
 }

@@ -23,7 +23,7 @@ function knightMoves(start, end) {
     let position = [start[0], start[1]];
     graph[start[0]][start[1]][0] = 0;
 
-    while (!finished(position, end)) {
+    while (!comparePositions(position, end)) {
         // check all 8 possible movements
         if ((position[0] + 1 >= 0 && position[0] + 1 < row) && (position[1] + 2 >= 0 && position[1] + 2 < col)) { //check if position is in bounds
             if (graph[position[0] + 1][position[1] + 2][0] > graph[position[0]][position[1]][0] + 1) { //check if movement will reduce moves for that spot
@@ -97,8 +97,8 @@ function knightMoves(start, end) {
     getPath(start, end);
 }
 
-function finished(position, end) {
-    if (position[0] == end[0] && position[1] == end[1]) {
+function comparePositions(position1, position2) {
+    if (position1[0] == position2[0] && position1[1] == position2[1]) {
         return true;
     }
     else {
@@ -115,7 +115,7 @@ function displayGraph() {
 function getPath(start, end) {
     path.unshift(graph[end[0]][end[1]]);
 
-    while (path[0][0] != start[0] && path[0][1] != start[1]) {
+    while (!comparePositions(path[0][1], start)) {
         path.unshift(graph[path[0][1][0]][path[0][1][1]]);
     }
 

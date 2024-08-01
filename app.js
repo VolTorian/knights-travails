@@ -25,69 +25,14 @@ function knightMoves(start, end) {
 
     while (!comparePositions(position, end)) {
         // check all 8 possible movements
-        if ((position[0] + 1 >= 0 && position[0] + 1 < row) && (position[1] + 2 >= 0 && position[1] + 2 < col)) { //check if position is in bounds
-            if (graph[position[0] + 1][position[1] + 2][0] > graph[position[0]][position[1]][0] + 1) { //check if movement will reduce moves for that spot
-                queue.push([position[0] + 1, position[1] + 2]);
-                graph[position[0] + 1][position[1] + 2][0] = graph[position[0]][position[1]][0] + 1;
-                graph[position[0] + 1][position[1] + 2][1] = [position[0], position[1]]; //set "parent" position
-            }
-        }
-
-        if ((position[0] + 2 >= 0 && position[0] + 2 < row) && (position[1] + 1 >= 0 && position[1] + 1 < col)) {
-            if (graph[position[0] + 2][position[1] + 1][0] > graph[position[0]][position[1]][0] + 1) {
-                queue.push([position[0] + 2, position[1] + 1]);
-                graph[position[0] + 2][position[1] + 1][0] = graph[position[0]][position[1]][0] + 1;
-                graph[position[0] + 2][position[1] + 1][1] = [position[0], position[1]];
-            }
-        }
-
-        if ((position[0] + 2 >= 0 && position[0] + 2 < row) && (position[1] - 1 >= 0 && position[1] - 1 < col)) {
-            if (graph[position[0] + 2][position[1] - 1][0] > graph[position[0]][position[1]][0] + 1) {
-                queue.push([position[0] + 2, position[1] - 1]);
-                graph[position[0] + 2][position[1] - 1][0] = graph[position[0]][position[1]][0] + 1;
-                graph[position[0] + 2][position[1] - 1][1] = [position[0], position[1]];
-            }
-        }
-
-        if ((position[0] + 1 >= 0 && position[0] + 1 < row) && (position[1] - 2 >= 0 && position[1] - 2 < col)) {
-            if (graph[position[0] + 1][position[1] - 2][0] > graph[position[0]][position[1]][0] + 1) {
-                queue.push([position[0] + 1, position[1] - 2]);
-                graph[position[0] + 1][position[1] - 2][0] = graph[position[0]][position[1]][0] + 1;
-                graph[position[0] + 1][position[1] - 2][1] = [position[0], position[1]];
-            }
-        }
-
-        if ((position[0] - 1 >= 0 && position[0] - 1 < row) && (position[1] - 2 >= 0 && position[1] - 2 < col)) {
-            if (graph[position[0] - 1][position[1] - 2][0] > graph[position[0]][position[1]][0] + 1) {
-                queue.push([position[0] - 1, position[1] - 2]);
-                graph[position[0] - 1][position[1] - 2][0] = graph[position[0]][position[1]][0] + 1;
-                graph[position[0] - 1][position[1] - 2][1] = [position[0], position[1]];
-            }
-        }
-
-        if ((position[0] - 2 >= 0 && position[0] - 2 < row) && (position[1] - 1 >= 0 && position[1] - 1 < col)) {
-            if (graph[position[0] - 2][position[1] - 1][0] > graph[position[0]][position[1]][0] + 1) {
-                queue.push([position[0] - 2, position[1] - 1]);
-                graph[position[0] - 2][position[1] - 1][0] = graph[position[0]][position[1]][0] + 1;
-                graph[position[0] - 2][position[1] - 1][1] = [position[0], position[1]];
-            }
-        }
-
-        if ((position[0] - 2 >= 0 && position[0] - 2 < row) && (position[1] + 1 >= 0 && position[1] + 1 < col)) {
-            if (graph[position[0] - 2][position[1] + 1][0] > graph[position[0]][position[1]][0] + 1) {
-                queue.push([position[0] - 2, position[1] + 1]);
-                graph[position[0] - 2][position[1] + 1][0] = graph[position[0]][position[1]][0] + 1;
-                graph[position[0] - 2][position[1] + 1][1] = [position[0], position[1]];
-            }
-        }
-
-        if ((position[0] - 1 >= 0 && position[0] - 1 < row) && (position[1] + 2 >= 0 && position[1] + 2 < col)) {
-            if (graph[position[0] - 1][position[1] + 2][0] > graph[position[0]][position[1]][0] + 1) {
-                queue.push([position[0] - 1, position[1] + 2]);
-                graph[position[0] - 1][position[1] + 2][0] = graph[position[0]][position[1]][0] + 1;
-                graph[position[0] - 1][position[1] + 2][1] = [position[0], position[1]];
-            }
-        }
+        checkPosition(position, 1, 2);
+        checkPosition(position, 2, 1);
+        checkPosition(position, 2, -1);
+        checkPosition(position, 1, -2);
+        checkPosition(position, -1, -2);
+        checkPosition(position, -2, -1);
+        checkPosition(position, -2, 1);
+        checkPosition(position, -1, 2);
 
         position = [queue[0][0], queue[0][1]];
         queue.shift();
@@ -95,6 +40,19 @@ function knightMoves(start, end) {
     console.log(`Finished after ${graph[end[0]][end[1]][0]} moves`);
     displayGraph();
     getPath(start, end);
+}
+
+function checkPosition(position, rowOffset, colOffset) {
+    let newRow = position[0] + rowOffset;
+    let newCol = position[1] + colOffset;
+
+    if ((newRow >= 0 && newRow < row) && (newCol >= 0 && newCol < col)) { //check if position is in bounds
+        if (graph[newRow][newCol][0] > graph[position[0]][position[1]][0] + 1) { //check if position has been visited
+            queue.push([newRow, newCol]);
+            graph[newRow][newCol][0] = graph[position[0]][position[1]][0] + 1;
+            graph[newRow][newCol][1] = [position[0], position[1]]; //set "parent node" position
+        }
+    }
 }
 
 function comparePositions(position1, position2) {

@@ -78,8 +78,8 @@ function getPath(start, end) {
     }
 
     console.log(`Starting at [${start}]`);
-    for (let i = 2; i < path.length; i++) {
-        console.log(`Step ${i - 1}: [${path[i][1]}]`);
+    for (let i = 1; i < path.length; i++) {
+        console.log(`Step ${i}: [${path[i][1]}]`);
     }
     console.log(`Ending at step [${end}]`);
 }
